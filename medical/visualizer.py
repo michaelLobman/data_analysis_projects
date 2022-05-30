@@ -13,6 +13,10 @@ df['gluc'] = np.where(df['gluc'] > 1, 1, 0)
 
 category_order = ['active', 'alco', 'cholesterol', 'gluc', 'overweight', 'smoke']
 
+df_cat = pd.melt(df, id_vars='cardio', value_vars=['cholesterol', 'gluc', 'smoke', 'alco', 'active', 'overweight'])
+p = sns.catplot(x='variable', kind='count', aspect=0.7, col='cardio', hue='value', data=df_cat, order=category_order)
+p.set(ylabel="total")
+
 clean_masks = (
 	df['ap_lo'] <= df['ap_hi']
 	) & (
