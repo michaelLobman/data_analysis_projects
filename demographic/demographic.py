@@ -20,46 +20,12 @@ def calculate_demographic_data(print_data=True):
 
 	num_min_workers = len(df[min_hours_mask])
 
-
 	rich_percentage = round(len(df.loc[rich & min_hours_mask]) / num_min_workers * 100, 1)
-
-
-
-	# just have to figure out how to do this for each particular country
-	# i think this can be googled and looked up on the google collab -
-	#i t's just about getting native country to be a certain value essentially
-
-	# query = df.groupby(['native-country']).size()
-	# query2 = df[rich]['native-country'].count()
-
-
-
-	# print(query2)
-
-	# closest effort
-	query = df[rich]['native-country'].value_counts()
-	query2 = df['native-country'].value_counts()
-	query3 = round((df.loc[rich]['native-country'].value_counts() / df['native-country'].value_counts() * 100).sort_values(ascending=False).head(1).iloc[0], 1)
-
-	print(query3)
-
-	# old effort
-	# df['pct_rich'] = len(df[rich]['native-country']) / len(df['native-country'])
-	# highest_earning_country = df[rich]['native-country']
-	# print(df['fnlwgt']['native-country'].value_counts())
-
-
 
 	highest_earning_country_percentage = round((df[rich]['native-country'].value_counts()['United-States'] / len(df[rich])) * 100, 1)
 
 	india = (df['native-country'] == 'India')
 
 	df.loc[rich & india]['occupation'].value_counts().idxmax()
-
-	# print(df.loc[(df['native-country'] == 'India') & (df['salary'] == '>50K')])
-
-
-
-
 
 calculate_demographic_data()
